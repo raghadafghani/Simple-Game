@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Button Press Game</title>
+<style>
+  .button {
+    padding: 10px 20px;
+    margin: 5px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  #game-container {
+    text-align: center;
+    padding: 20px;
+  }
+</style>
+</head>
+<body>
+<div id="game-container">
+  <p>Try pressing the buttons in the correct sequence:</p>
+  <button class="button" id="btn-up">Up</button>
+  <button class="button" id="btn-left">Left</button>
+  <button class="button" id="btn-right">Right</button>
+  <button class="button" id="btn-down">Down</button>
+  <p id="message"></p>
+</div>
+
+<script>
+  let sequence = ['btn-up', 'btn-left', 'btn-right', 'btn-down'];
+  let currentStep = 0;
+
+  function pressButton(btnId) {
+    if (btnId === sequence[currentStep]) {
+      currentStep++;
+      if (currentStep === sequence.length) {
+        document.getElementById('message').textContent = 'Well done! Sequence complete!';
+        currentStep = 0;
+      }
+    } else {
+      document.getElementById('message').textContent = 'Oops! Wrong order, try again.';
+      currentStep = 0;
+    }
+  }
+
+  document.querySelectorAll('.button').forEach(btn => {
+    btn.addEventListener('click', () => pressButton(btn.id));
+  });
+</script>
+</body>
+</html>
